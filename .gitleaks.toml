@@ -1,0 +1,10 @@
+title = "sanchalan gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Test vectors contain a public, test-only Ed25519 seed and its public key by design."
+paths = [
+  '''testvectors/canonicalization/vectors\.json''',
+]
