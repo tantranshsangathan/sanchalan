@@ -16,3 +16,6 @@ jobs:
       - run: go vet ./...
       - run: go test ./...
       - run: go run ./cmd/schemalint schemas
+      - run: python3 -m pip install cryptography==46.0.5
+      - run: python3 -I testvectors/tools/vectors.py check testvectors/canonicalization/vectors.json
+      - run: testvectors/tools/openssl_verify.sh testvectors/canonicalization/vectors.json

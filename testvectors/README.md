@@ -2,11 +2,15 @@
 
 Fixed inputs and expected results that every implementation (agent, server, independent verifier) must agree on.
 
-| Directory | Purpose |
+| Path | Purpose |
 | --- | --- |
-| `canonicalization/` | Input objects, exact RFC 8785 canonical bytes, and Ed25519 signatures over the domain-tagged bytes |
-| `negative/envelope/` | One malformed or tampered envelope per rejection reason code |
-| `negative/manifest/` | Manifests that must be rejected (changed arguments with unchanged package digest, missing verification, and so on) |
-| `negative/policy/` | Policies that must be rejected (out of scope, expired, lower version) |
+| `canonicalization/vectors.json` | RFC 8785 canonicalization cases (key order by UTF-16, number formatting, escapes), strict-input rejection cases (duplicate keys, lone surrogates, depth over 16, NaN, invalid UTF-8), and Ed25519 signature cases including domain separation and malformed signatures |
+| `negative/envelope/`, `negative/manifest/`, `negative/policy/` | One tampered or malformed object per rejection reason code. Empty until the matching schemas are public |
+| `tools/vectors.py` | Independent Python canonicalizer and verifier; generates and checks `vectors.json` |
+| `tools/openssl_verify.sh` | Checks the signature vector with OpenSSL only |
 
-Empty until the matching schemas land. Vectors must contain only generated test keys, never real key material.
+Verifiers in this repo: Go (`internal/jcs`), Python (`tools/vectors.py`), OpenSSL (signature only). A difference between them is a bug in one of them.
+
+Regenerate: `python3 -I testvectors/tools/vectors.py generate > testvectors/canonicalization/vectors.json`. Expected canonical strings are written by hand in the generator, and generation fails if the Python canonicalizer disagrees with them.
+
+The Ed25519 seed in `vectors.json` is a public test key. Never use it, or any key in this directory, for anything real. Vectors here are generic (domain tag `sn1/test`); vectors that carry envelope, manifest or policy content stay in the private design repo until those schemas are released.
