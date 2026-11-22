@@ -53,6 +53,13 @@ func TestNestedObjectRejected(t *testing.T) {
 	}
 }
 
+func TestIfConditionMayBeOpen(t *testing.T) {
+	body := `{` + header + `, "type":"object","additionalProperties":false,"properties":{"a":{"type":"string"}},"if":{"properties":{"a":{"const":"x"}}},"then":{"required":["a"]}}`
+	if got := lint(t, "x.schema.json", body); len(got) != 0 {
+		t.Fatalf("if condition must not be flagged: %v", got)
+	}
+}
+
 func TestMissingHeader(t *testing.T) {
 	got := lint(t, "x.schema.json", `{"type":"string"}`)
 	if !contains(got, "$schema") || !contains(got, "$id") {

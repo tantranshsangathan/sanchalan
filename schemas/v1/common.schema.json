@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.sanchalan.invalid/v1/common.schema.json",
+  "$id": "urn:sanchalan:schema:common:1",
   "title": "Shared definitions",
-  "$comment": "Draft. Hoists the definitions every signed object references. The $id host is a placeholder until a schema domain is chosen.",
+  "$comment": "Draft. Hoists the definitions every signed object references. Schema IDs are URNs, so no domain is needed.",
   "$defs": {
     "uuid": {
       "type": "string",

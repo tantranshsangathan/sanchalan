@@ -93,7 +93,9 @@ func walk(n map[string]any, loc string, add func(loc, msg string)) {
 			}
 		}
 	}
-	for _, kw := range []string{"items", "additionalProperties", "not", "if", "then", "else", "contains"} {
+	// "if" is a match condition over an instance, not an object definition, so it
+	// is deliberately not walked: it must stay open to match partial objects.
+	for _, kw := range []string{"items", "additionalProperties", "not", "then", "else", "contains"} {
 		if sub, ok := n[kw].(map[string]any); ok {
 			walk(sub, loc+"/"+kw, add)
 		}
