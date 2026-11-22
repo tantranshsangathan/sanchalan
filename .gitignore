@@ -1,0 +1,24 @@
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/bin/
+/dist/
+vendor/
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Secrets and keys, never commit
+*.pem
+*.key
+*.pfx
+*.p12
+.env
+.env.*
