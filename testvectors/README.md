@@ -9,7 +9,7 @@ Fixed inputs and expected results that every implementation (agent, server, inde
 | `tools/vectors.py` | Independent Python canonicalizer and verifier; generates and checks `vectors.json` |
 | `tools/openssl_verify.sh` | Checks the signature vector with OpenSSL only |
 
-Verifiers in this repo: Go (`internal/jcs`), Python (`tools/vectors.py`), OpenSSL (signature only). A difference between them is a bug in one of them.
+Verifiers in this repo: Go (`pkg/jcs`), Python (`tools/vectors.py`), OpenSSL (signature only). A difference between them is a bug in one of them.
 
 Regenerate: `python3 -I testvectors/tools/vectors.py generate > testvectors/canonicalization/vectors.json`. Expected canonical strings are written by hand in the generator, and generation fails if the Python canonicalizer disagrees with them.
 

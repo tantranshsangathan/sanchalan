@@ -16,3 +16,4 @@ Contributing: see [CONTRIBUTING.md](CONTRIBUTING.md). Security reports: see [SEC
 | `testvectors/` | Canonicalization vectors and negative corpora shared by all implementations |
 | `cmd/schemalint/` | Schema linter run in CI: `go run ./cmd/schemalint schemas` |
 | `internal/schemalint/` | Linter implementation and tests |
+| `pkg/jcs/` | RFC 8785 canonicalizer, strict JSON parser, domain-tagged Ed25519 helpers |

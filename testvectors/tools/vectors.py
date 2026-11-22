@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Independent RFC 8785 canonicalizer and test vector generator.
 
-Deliberately shares no code with the Go implementation in internal/jcs, so the
+Deliberately shares no code with the Go implementation in pkg/jcs, so the
 two can be compared. Uses the `cryptography` package for Ed25519.
 
   python3 -I vectors.py generate > ../canonicalization/vectors.json
