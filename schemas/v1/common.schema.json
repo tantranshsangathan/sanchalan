@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sanchalan.invalid/v1/common.schema.json",
+  "title": "Shared definitions",
+  "$comment": "Draft. Hoists the definitions every signed object references. The $id host is a placeholder until a schema domain is chosen.",
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kid", "alg", "sig"],
+      "properties": {
+        "kid": { "$ref": "#/$defs/digest" },
+        "alg": { "const": "Ed25519" },
+        "sig": { "type": "string", "pattern": "^[A-Za-z0-9_-]{86}$" }
+      }
+    }
+  }
+}
